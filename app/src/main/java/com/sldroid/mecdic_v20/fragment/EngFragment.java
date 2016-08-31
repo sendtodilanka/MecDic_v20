@@ -40,11 +40,10 @@ public class EngFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbHelper = new TestAdapter(getActivity().getApplicationContext());
         dbHelper.createDatabase();
-        dbHelper.open();
     }
 
     @Override

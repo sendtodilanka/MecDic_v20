@@ -46,7 +46,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.WordViewHolder
         holder.txtId.setText(String.valueOf(mDataSet.get(position).get_id()));
         holder.txtWord.setText(mDataSet.get(position).getWord());
 
-        int charLimit = 48;
+        int charLimit = 40;
         if (mDataSet.get(position).getDefinition().length() > charLimit)
             holder.txtDef.setText(mDataSet.get(position).getDefinition().substring(0,charLimit)+"...");
         else
