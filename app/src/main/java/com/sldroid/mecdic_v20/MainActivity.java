@@ -221,7 +221,12 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             EngFragment engFragment = (EngFragment)mViewPager.getAdapter()
                     .instantiateItem(mViewPager, mViewPager.getCurrentItem());
             engFragment.textSearch(newText.replace(" ",""));
-
+        }
+        else if(mViewPager.getCurrentItem() == 1) //First fragment
+        {
+            SinFragment sinFragment = (SinFragment) mViewPager.getAdapter()
+                    .instantiateItem(mViewPager, mViewPager.getCurrentItem());
+            sinFragment.textSearch(newText.replace(" ",""));
         }
         return false;
     }

@@ -88,9 +88,30 @@ public class TestAdapter
 
     public void favUpdate(String table, String id, int num){
 
+        open();
         ContentValues cv = new ContentValues();
         cv.put("favourite", num);
 
         mDb.update(table, cv, "_id="+id, null);
+        close();
+    }
+
+    public boolean isFavourite(String table,String id){
+        boolean state = false;
+        open();
+        Cursor mCursor = mDb.query(
+                table, new String[] {"favourite"}, "_id=?", new String[]{id}, null,null,null);
+
+        if (mCursor.moveToFirst()) {
+            do {
+                if(mCursor.getInt(mCursor.getColumnIndex("favourite"))==1)
+                    state = true;
+                else
+                    state = false;
+            } while (mCursor.moveToNext());
+        }
+
+        close();
+        return state;
     }
 }

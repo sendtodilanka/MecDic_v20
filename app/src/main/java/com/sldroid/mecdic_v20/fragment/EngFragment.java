@@ -11,11 +11,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.sldroid.mecdic_v20.R;
 import com.sldroid.mecdic_v20.dbms.TestAdapter;
+import com.sldroid.mecdic_v20.extra.EnWordAdapter;
 import com.sldroid.mecdic_v20.extra.Word;
-import com.sldroid.mecdic_v20.extra.WordAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ public class EngFragment extends Fragment {
     private static View view;
     private static RecyclerView recyclerView;
     private LinearLayoutManager layoutManager;
-    private WordAdapter wordAdapter;
+    private EnWordAdapter wordAdapter;
     private TestAdapter dbHelper;
     private Typeface siUnicode;
     private SharedPreferences sPrefer;
@@ -56,7 +57,7 @@ public class EngFragment extends Fragment {
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         words = dbHelper.getAllWord("enDic");
-        wordAdapter = new WordAdapter(words, getContext());
+        wordAdapter = new EnWordAdapter(words, getContext());
         recyclerView.setAdapter(wordAdapter);
         wordAdapter.notifyDataSetChanged();
         return view;
@@ -64,7 +65,7 @@ public class EngFragment extends Fragment {
 
     public void textSearch(String inputTxt){
         ArrayList<Word> wordList = filter(words,inputTxt);
-        wordAdapter = new WordAdapter(wordList, getContext());
+        wordAdapter = new EnWordAdapter(wordList, getContext());
         recyclerView.setAdapter(wordAdapter);
         wordAdapter.notifyDataSetChanged();
     }
