@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import com.sldroid.mecdic_v20.R;
 import com.sldroid.mecdic_v20.dbms.TestAdapter;
+import com.sldroid.mecdic_v20.extra.EnWordAdapter;
 import com.sldroid.mecdic_v20.extra.SiWordAdapter;
 import com.sldroid.mecdic_v20.extra.Word;
 
@@ -64,6 +65,12 @@ public class SinFragment extends Fragment {
     public void textSearch(String inputTxt){
         ArrayList<Word> wordList = filter(words,inputTxt);
         wordAdapter = new SiWordAdapter(wordList, getContext());
+        recyclerView.setAdapter(wordAdapter);
+        wordAdapter.notifyDataSetChanged();
+    }
+
+    public void resetSearch(){
+        wordAdapter = new SiWordAdapter(words, getContext());
         recyclerView.setAdapter(wordAdapter);
         wordAdapter.notifyDataSetChanged();
     }

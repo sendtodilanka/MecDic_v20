@@ -57,6 +57,15 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     private Drawer result;
     private static SharedPreferences sPrefer;
     private static SharedPreferences.Editor editor;
+    private SearchView searchView;
+    private MenuItem searchItem;
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        editor.putString("enSearch", null).apply();
+        editor.putString("siSearch", null).apply();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +89,23 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         // Set up the ViewPager with the sections adapter.
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(dicPagerAdapter);
+
+        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
@@ -195,8 +221,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 .setIcon(new IconicsDrawable(this, FontAwesome.Icon.faw_search)
                         .color(Color.WHITE).actionBar().paddingDp(3));
 
-        MenuItem searchItem = menu.findItem(R.id.search);
-        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchItem = menu.findItem(R.id.search);
+        searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(this);
 
         return true;
@@ -221,12 +247,14 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
             EngFragment engFragment = (EngFragment)mViewPager.getAdapter()
                     .instantiateItem(mViewPager, mViewPager.getCurrentItem());
             engFragment.textSearch(newText.replace(" ",""));
+            editor.putString("enSearch", newText).apply();
         }
         else if(mViewPager.getCurrentItem() == 1) //First fragment
         {
             SinFragment sinFragment = (SinFragment) mViewPager.getAdapter()
                     .instantiateItem(mViewPager, mViewPager.getCurrentItem());
             sinFragment.textSearch(newText.replace(" ",""));
+            editor.putString("siSearch", newText).apply();
         }
         return false;
     }

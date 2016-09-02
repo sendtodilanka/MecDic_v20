@@ -70,6 +70,12 @@ public class EngFragment extends Fragment {
         wordAdapter.notifyDataSetChanged();
     }
 
+    public void resetSearch(){
+        wordAdapter = new EnWordAdapter(words, getContext());
+        recyclerView.setAdapter(wordAdapter);
+        wordAdapter.notifyDataSetChanged();
+    }
+
     public ArrayList<Word> filter(List<Word> wordList, String query) {
         query = query.toLowerCase();
 
